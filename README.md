@@ -189,7 +189,7 @@ di mana `user1`, `user2` dan `user3` adalah nama user yang diizinkan untuk login
 Setelah itu, reload SSH _daemon_ dengan perintah:
 
 ```bash
-sudo systemctl reload sshd
+sudo service ssh restart
 ```
 
 Sekarang login tidak bisa lagi menggunakan password, tapi harus menggunakan _public key_.
@@ -203,6 +203,12 @@ Pertama-tama, buka halaman repositori tersebut, lalu pilih OS, versi MariaDB dan
 ```bash
 sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db
 sudo add-apt-repository 'deb [arch=amd64,i386,ppc64el] http://sfo1.mirrors.digitalocean.com/mariadb/repo/10.1/ubuntu trusty main'
+```
+
+Jika perintah `add-apt-repository` tidak terdaftar, maka install perintah tersebut dengan menggunakan perintah:
+
+```bash
+sudo apt-get install software-properties-common
 ```
 
 Setelah repositori berhasil disimpan, update _cache_ dan install MariaDB.
@@ -285,6 +291,12 @@ installation should now be secure.
 Thanks for using MariaDB!
 ```
 
+Sekarang kita dapat masuk ke MariaDB dengan perintah:
+
+```bash
+sudo mysql -p
+```
+
 ### Buat database dan user baru
 
 Sebagai contoh, di sini akan dibuat database dengan nama `yulia_server`. Perintahnya adalah:
@@ -308,13 +320,19 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON yulia_server.* TO 'server'@'localhost';
 
 Dengan perintah di atas, kita telah membuat user baru dengan nama `server` yang dapat mengakses dan memanipulasi data dalam database `yulia_server`, tetapi tidak dapat mengubah struktur database tersebut.
 
+Untuk keluar dari MariaDB, gunakan perintah
+
+```SQL
+exit
+```
+
 ### Install Caddy web server
 
 Caddy adalah web server seperti Apache, nginx dan lighttpd, tapi dengan fitur, tujuan dan kelebihan yang berbeda. Salah satu tujuan Caddy adalah untuk mempermudah proses _development_, _deployment_ dan _hosting_ sehingga setiap orang, baik developer, blogger atau desainer, dapat meng-_hosting_ websitenya secara mudah. Selain itu, Caddy adalah web server yang pertama dan satu-satunya yang secara otomatis mengaktifkan HTTPS pada website yang dia _serve_.
 
 Caddy dikembangkan menggunakan bahasa pemrograman Go, sehingga hanya terdiri atas satu buah file _executable_ yang bisa diletakkan di mana saja. Untuk menginstall Caddy, pertama-tama buka halaman [download Caddy](https://caddyserver.com/download). Pilih jenis server, _middleware_ dan DNS _provider_ yang diinginkan. Setelah itu, klik kanan pada OS yang kita gunakan, lalu klik `copy URL`. 
 
-Di sini dipilih Caddy untuk Linux 64-bit, sehigga URL nya adalah `https://caddyserver.com/download/build?os=linux&arch=amd64&features=`.
+Di sini dipilih Caddy untuk Linux 64-bit, sehingga URL nya adalah `https://caddyserver.com/download/build?os=linux&arch=amd64&features=`.
 
 SSH kembali ke VPS yang digunakan. Sebagai contoh, di sini Caddy akan diinstall di `~/Caddy`. Perintah yang digunakan adalah:
 
@@ -483,7 +501,19 @@ Untuk menghapus salah satu aturan UFW digunakan perintah `ufw delete`. Sebagai c
 sudo ufw delete allow ssh
 ```
 
-Untuk mengaktifkan UFW, gunakan perintah:
+Untuk melihat seluruh aturan yang telah dibuat, dapat digunakan perintah:
+
+```bash
+sudo ufw show added
+```
+
+Sebelum mengaktifkan UFW, pastikan bahwa UFW dapat digunakan di VPS. Untuk mengujinya digunakan perintah:
+
+```bash
+sudo /usr/share/ufw/check-requirements
+```
+
+Jika pengujian selesai dengan sukse, maka UFW dapat diaktifkan dengan perintah:
 
 ```bash
 sudo ufw enable
