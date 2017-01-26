@@ -9,3 +9,4 @@ Repository semua tutorial yang mungkin nanti akan diperlukan.
 ### Go Language
 
 * [_Cross compile_ go-sqlcipher](https://github.com/RadhiFadlillah/tutorial/blob/master/go-cross-compile-sqlcipher.md)
+* [Setup VS Code untuk Go dan Web Development](https://github.com/RadhiFadlillah/tutorial/blob/master/setup-vscode.md)
