@@ -26,7 +26,7 @@ Dalam tutorial ini dilakukan _cross compile_ aplikasi Go yang menggunakan packag
    env CGO_ENABLED=1 GOOS=windows GOARCH=386 CC=i686-w64-mingw32-gcc go build
    ```
 
-4. _Cross compile_ OpenSSL untuk Windows 32-bit
+4. _Cross compile_ OpenSSL untuk Windows 64-bit
 
    Masuk ke folder hasil ekstrak, lalu jalankan script `configure` agar menggunakan compiler Windows 64-bit :
 
