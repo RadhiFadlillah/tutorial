@@ -6,7 +6,11 @@ Ada beberapa langkah yang harus dilakukan, yaitu :
 2. Menggunakan Raw Therapee, :
    
    - Aktifkan auto levels untuk semua gambar.
-   - Kurangi nilai Red pada _Color Balance_.
+   - Atur _Color Balance_ :
+   
+     - Temperature 6490
+     - Tint 1.002
+     - Blue/Red 0.98
 
 3. Upload ke [Clipping Magic](https://clippingmagic.com/), lalu hapus background. Setiap gambar dilakukan _clipping_ sebanyak dua kali :
 
