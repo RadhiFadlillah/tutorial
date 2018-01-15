@@ -53,3 +53,11 @@ Ada beberapa langkah yang harus dilakukan, yaitu :
     ```
     rsync --update -razP * [IP]:website
     ```
+
+---
+
+BONUS: membuat gambar untuk Instagram :
+
+```
+mogrify -resize '1100x1100>' -extent 1100x1100 -gravity center -flatten -background white -format jpg -path instagram/ *.png
+```
